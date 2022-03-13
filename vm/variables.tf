@@ -52,7 +52,12 @@ variable "vlan_id" {
   type = string
 }
 
-variable "storage_size" {
+variable "storage_size_base" {
+  type    = string
+  default = "32G"
+}
+
+variable "storage_size_data" {
   type    = string
   default = "128G"
 }
