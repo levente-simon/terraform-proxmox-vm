@@ -48,7 +48,7 @@ module "vm_hosts" {
   fqdn              = each.value.fqdn
   pm_node           = each.value.pm_node
   user              = var.os_user
-  ipconfig          = "ip=${each.value.ip}/${each.value.mask},gw=${each.value.gw}"
+  ipconfig          = each.value.ip == "dhcp" ? "dhcp" : "ip=${each.value.ip}/${each.value.mask},gw=${each.value.gw}"
   template_name     = each.value.template_name
   vlan_id           = each.value.vlan_id
   memory            = each.value.memory
