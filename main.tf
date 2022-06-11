@@ -52,8 +52,7 @@ module "vm_hosts" {
   template_name     = each.value.template_name
   vlan_id           = each.value.vlan_id
   memory            = each.value.memory
-  storage_size_base = each.value.storage_size_base
-  storage_size_data = each.value.storage_size_data
+  storage_size      = each.value.storage_size
   ssh_public_key    = tls_private_key.ssh.public_key_openssh
   exec              = each.value.exec
 }
