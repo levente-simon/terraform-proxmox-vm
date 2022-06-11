@@ -9,12 +9,6 @@ terraform {
 
 locals {
   a_record_data = regex("(?P<hostname>^[^.]*)\\.(?P<domain>.*$)", var.fqdn)
-  default_exec = [
-    "sudo mkfs.xfs /dev/sdb",
-    "sudo mkdir /data",
-    "cat <<EOF | sudo tee -a /etc/fstab > /dev/null\n/dev/sdb /data xfs defaults 0 0\nEOF",
-    "sudo mount -a",
-  ]
 }
 
 resource "proxmox_vm_qemu" "this" {
@@ -46,19 +40,11 @@ resource "proxmox_vm_qemu" "this" {
   bootdisk    = "scsi0"
   disk {
     slot     = 0
-    size     = var.storage_size_base
+    size     = var.storage_size
     type     = "scsi"
     storage  = var.storage_pool
     iothread = 1
   }
-  disk {
-    slot     = 1
-    size     = var.storage_size_data
-    type     = "scsi"
-    storage  = "local-lvm"
-    iothread = 1
-  } 
-
 
   connection {
     type        = "ssh"
@@ -68,7 +54,7 @@ resource "proxmox_vm_qemu" "this" {
   }
 
   provisioner "remote-exec" {
-    inline = concat(local.default_exec, var.exec)
+    inline = var.exec
   }
 }
 
