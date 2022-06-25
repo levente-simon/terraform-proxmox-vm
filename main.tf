@@ -54,7 +54,7 @@ module "vm_hosts" {
   memory            = each.value.memory
   storage_size      = each.value.storage_size
   ssh_public_key    = tls_private_key.ssh.public_key_openssh
-  sockets           = each.value.sockets
-  cores             = each.value.cores
+  # sockets           = each.value.sockets
+  # cores             = each.value.cores
   exec              = each.value.exec
 }
