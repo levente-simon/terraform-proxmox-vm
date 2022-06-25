@@ -69,12 +69,12 @@ variable "memory" {
 
 variable "sockets" {
   type    = number
-  default = 2
+  # default = 2
 }
 
 variable "cores" {
   type    = number
-  default = 2
+  # default = 2
 }
 
 variable "exec" {
