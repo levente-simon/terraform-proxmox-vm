@@ -41,7 +41,7 @@ module "vm_hosts" {
   dns_port            = var.dns_port
   searchdomain        = var.searchdomain
 
-  for_each = var.cluster_hosts
+  for_each = var.hosts
 
   source   = "./vm"
 
